@@ -63,6 +63,25 @@ describe('Testes do sales service', function () {
     expect(serviceResponse.data).to.be.deep.equal({ message: 'Sale not found' });
   });
 
+  it('Testa se a função insert tem o retorno esperado', async function () {
+    sinon.stub(connection, 'execute')
+    .onFirstCall()
+    .resolves([{ insertId: 1 }]);
+    const sale = {
+      productId: 2,
+      quantity: 10,
+    };
+    const expectedResponse = {
+      status: 'SUCCESS',
+      data: {
+        id: 1,
+        itemsSold: [sale],
+      },
+    };
+    const result = await salesService.insert([sale]);
+    expect(result).to.be.deep.equal(expectedResponse);
+  });
+
   afterEach(function () {
     sinon.restore();
   });

@@ -41,6 +41,7 @@ describe('Testes do products service', function () {
     expect(serviceResponse.status).to.be.equal('SUCCESS');
     expect(serviceResponse.data).to.have.keys('data', 'status');
   });
+
   it('Testa se a função findById tem o retorno esperado sem um id correspondente', async function () {
     sinon.stub(connection, 'execute').resolves([[]], []);
     const serviceResponse = await productsService.findById(10);
@@ -48,6 +49,16 @@ describe('Testes do products service', function () {
     expect(serviceResponse.data).to.have.key('message');
     expect(serviceResponse.data.message).to.include('Product not found');
   });
+
+  it('Testa se a função createProduct tem o retorno correto', async function () {
+    const productName = 'Produto de teste';
+    sinon.stub(connection, 'execute').resolves([{ insertId: 1 }]);
+    const serviceResponse = await productsService.createProduct(productName);
+    const expectedData = { id: 1, name: productName };
+    expect(serviceResponse.status).to.be.equal('SUCCESS');
+    expect(serviceResponse.data).to.be.deep.equal(expectedData);
+  });
+  
   afterEach(function () {
     sinon.restore();
   });
