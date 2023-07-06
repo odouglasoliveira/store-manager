@@ -12,7 +12,7 @@ describe('Testes do sales controller', function () {
     const salesMock = [
       {
         saleId: 1,
-        date: '2023-07-06T17:42:59.000Z',
+        date: '2023-07-06T17:41:59.000Z',
         productId: 1,
         quantity: 5,
       },
@@ -24,7 +24,7 @@ describe('Testes do sales controller', function () {
       },
       {
         saleId: 2,
-        date: '2023-07-06T17:42:59.000Z',
+        date: '2023-07-06T17:43:59.000Z',
         productId: 3,
         quantity: 15,
       },
@@ -44,12 +44,12 @@ describe('Testes do sales controller', function () {
   it('Testa se a função getById tem o retorno esperado quando o id existe', async function () {
     const salesMock = [
       {
-        date: '2023-07-06T17:42:59.000Z',
+        date: '2023-07-06T17:44:59.000Z',
         productId: 1,
         quantity: 5,
       },
       {
-        date: '2023-07-06T17:42:59.000Z',
+        date: '2023-07-06T17:45:59.000Z',
         productId: 2,
         quantity: 10,
       },
