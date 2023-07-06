@@ -1,6 +1,6 @@
-const joi = require('joi');
+const Joi = require('joi');
 
-const nameSchema = joi.string().required().min(5).label('name');
+const nameSchema = Joi.string().required().min(5).label('name');
 
 const validateName = (req, res, next) => {
   const { name } = req.body;
