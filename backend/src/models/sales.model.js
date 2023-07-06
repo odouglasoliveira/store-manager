@@ -30,7 +30,7 @@ const insert = async (sales) => {
   'INSERT INTO StoreManager.sales_products VALUES (?, ?, ?)',
   [insertId, sale.productId, sale.quantity],
 ));
-return { id: insertId, itemsSold: sales };
+  return { id: insertId, itemsSold: sales };
 };
 
 module.exports = {

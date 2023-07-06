@@ -52,6 +52,20 @@ describe('Testes do sales model', function () {
     expect(sales).to.be.deep.equal(responseMock1);
   });
 
+  it('Testa se a função insert funciona corretamente', async function () {
+    sinon.stub(connection, 'execute')
+    .onFirstCall()
+    .resolves([{ insertId: 1 }]);
+    const sale = {
+      productId: 2,
+      quantity: 10,
+    };
+    const expectedResponse = { id: 1, itemsSold: [sale] };
+
+    const result = await salesModel.insert([sale]);
+    expect(result).to.be.deep.equal(expectedResponse);
+  });
+
   afterEach(function () {
     sinon.restore();
   });
