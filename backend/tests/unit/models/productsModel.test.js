@@ -54,6 +54,14 @@ describe('Testes do products model', function () {
     expect(product).to.have.property('name').equal('Martelo de Thor');
   });
 
+  it('Testa se a função createProduct funciona corretamente', async function () {
+    const productName = 'Produto de Teste';
+    const expectedResult = { id: 1, name: productName };
+    sinon.stub(connection, 'execute').resolves([{ insertId: 1 }, []]);
+    const result = await productsModel.createProduct(productName);
+    expect(result).to.deep.equal(expectedResult);
+  });
+
   afterEach(function () {
     sinon.restore();
   });
