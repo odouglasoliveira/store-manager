@@ -68,6 +68,21 @@ describe('Testes do products controller', function () {
     expect(res.json).to.have.been.calledWith(responseMock);
   });
 
+  it('Testa se a função createProduct retorna o objeto esperado', async function () {
+    const productName = 'Produto de teste';
+    const productMock = { id: 1, name: productName };
+    const req = { body: { name: productName } };
+    const res = {
+      status: sinon.stub().returnsThis(),
+      json: sinon.stub(),
+    };
+    const expectedResponse = { id: 1, name: productName };
+    sinon.stub(productsService, 'createProduct').resolves({ data: productMock });
+    await productsController.createProduct(req, res);
+    expect(res.status).to.have.been.calledWith(201);
+    expect(res.json).to.have.been.calledWith(expectedResponse);
+  });
+
   afterEach(function () {
     sinon.restore();
   });
